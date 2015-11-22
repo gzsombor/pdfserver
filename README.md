@@ -15,7 +15,7 @@ Configure Spring MVC with the following bean:
 
     @Configuration
     public class WebMvcConfig extends WebMvcConfigurerAdapter {
-    
+        
         @Override
         public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
             configurer.favorPathExtension(true)
@@ -26,20 +26,21 @@ Configure Spring MVC with the following bean:
               .mediaType("pdf", PdfResponseConverter.PDF_MEDIA)
               ;
         }
-    
-      @Bean
-      public PdfResponseConverter pdfConverter() {
-          PdfResponseConverter converter = new PdfResponseConverter();
-          converter.setAlwaysReload(true);
-          // to filter out some not displayable characters in PDF
-          converter.setContentFormatter(content -> content.replaceAll("ő", "ö").replaceAll("Ő", "Ö"));
-          return converter;
-      }
-    
-      @Bean
-      public HtmlMessageConverter htmlConverter() {
-          return new HtmlMessageConverter();
-      }
+        
+        @Bean
+        public PdfResponseConverter pdfConverter() {
+            PdfResponseConverter converter = new PdfResponseConverter();
+            // always force template reloading
+            converter.setAlwaysReload(true);
+            // to filter out some not displayable characters in PDF
+            converter.setContentFormatter(content -> content.replaceAll("ő", "ö").replaceAll("Ő", "Ö"));
+            return converter;
+        }
+        
+        @Bean
+        public HtmlMessageConverter htmlConverter() {
+            return new HtmlMessageConverter();
+        }
     }
 
 
