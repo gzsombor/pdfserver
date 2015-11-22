@@ -43,4 +43,33 @@ Configure Spring MVC with the following bean:
         }
     }
 
+Add PdfOutput interface to the DTOs, for which the PDF generation should happen. It needs two method, to return the template name, which is used for rendering, and the name of the generated file name, for example: 
+
+    @Override
+    @JsonIgnore
+    public String getTemplateName() {
+        return "myReportTemplate";
+    }
+
+    @Override
+    @JsonIgnore
+    public String getOutputName() {
+        return "report-"+date.toString();
+    }
+
+In this case, it will use template from the classpath, under pdf/myReportTemplate.html, and the generated report could be 'report-2015-11-20.pdf'.
+
+And finally, in a Spring REST Controller: 
+
+    @RestController
+    @RequestMapping("/api")
+    public class MyReportResource {
+    
+            @RequestMapping(value = "/report/{id}",method = RequestMethod.GET)
+            public MyDTO get(@PathVariable Long id) {
+                return new MyDTO();
+            }
+
+In this case, when /api/report/123.html called, then the html report is generated, and when the /api/report/123.pdf then the PDF
+
 
