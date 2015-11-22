@@ -13,32 +13,33 @@ Add the following to your pom:
 	
 Configure Spring MVC with the following bean:
 
-  @Configuration
-  public class WebMvcConfig extends WebMvcConfigurerAdapter {
-      
-      @Override
-      public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
-          configurer.favorPathExtension(true)
+    @Configuration
+    public class WebMvcConfig extends WebMvcConfigurerAdapter {
+    
+        @Override
+        public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
+            configurer.favorPathExtension(true)
               .favorParameter(false)
               .ignoreAcceptHeader(true)
               .useJaf(false)
               .defaultContentType(MediaType.APPLICATION_JSON)
               .mediaType("pdf", PdfResponseConverter.PDF_MEDIA)
               ;
-      }
-      
+        }
+    
       @Bean
       public PdfResponseConverter pdfConverter() {
           PdfResponseConverter converter = new PdfResponseConverter();
           converter.setAlwaysReload(true);
+          // to filter out some not displayable characters in PDF
           converter.setContentFormatter(content -> content.replaceAll("ő", "ö").replaceAll("Ő", "Ö"));
           return converter;
       }
-      
+    
       @Bean
       public HtmlMessageConverter htmlConverter() {
           return new HtmlMessageConverter();
       }
-  }
+    }
 
-	
+
