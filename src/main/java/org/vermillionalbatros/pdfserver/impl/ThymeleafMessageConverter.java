@@ -27,6 +27,10 @@ public abstract class ThymeleafMessageConverter extends AbstractHttpMessageConve
     private SpringTemplateEngine templateEngine;
 
     private boolean alwaysReload = false;
+
+
+    private String pathPrefix = "";
+
     /**
      * 
      */
@@ -64,6 +68,15 @@ public abstract class ThymeleafMessageConverter extends AbstractHttpMessageConve
         this.templateEngine = templateEngine;
     }
 
+    public void setPathPrefix(String path) {
+        this.pathPrefix = path;
+    }
+
+    public String getPathPrefix() {
+        return this.pathPrefix;
+    }
+
+    
     @Override
     protected boolean supports(Class<?> clazz) {
         return PdfOutput.class.isAssignableFrom(clazz);
@@ -85,7 +98,7 @@ public abstract class ThymeleafMessageConverter extends AbstractHttpMessageConve
             templateEngine.getTemplateRepository().clearTemplateCache();
         }
 
-        final String content = templateEngine.process("pdf/" + toPdf.getTemplateName(), context);
+        final String content = templateEngine.process(pathPrefix + toPdf.getTemplateName(), context);
 
         return content;
     }

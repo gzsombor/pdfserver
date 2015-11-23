@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.vermillionalbatros</groupId>
   <artifactId>pdfserver</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>0.1</version>
   <name>PDF Server</name>
   <description>Infrastructure to generate PDF and HTML from templates in a Spring MVC application.</description>
 
