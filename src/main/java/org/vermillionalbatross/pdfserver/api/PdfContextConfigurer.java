@@ -1,4 +1,4 @@
-package org.vermillionalbatros.pdfserver.api;
+package org.vermillionalbatross.pdfserver.api;
 
 import org.thymeleaf.context.Context;
 
