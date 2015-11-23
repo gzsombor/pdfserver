@@ -6,11 +6,11 @@ Small module to help generating PDFs in a Spring MVC webapp
 Add the following to your pom:
 
     <dependency>
-        <groupId>org.vermillionalbatros</groupId>
+        <groupId>org.vermillionalbatross</groupId>
         <artifactId>pdfserver</artifactId>
-        <version>0.0.1</version>
+        <version>0.1</version>
     </dependency>
-	
+
 Configure Spring MVC with the following bean:
 
     @Configuration
@@ -34,11 +34,14 @@ Configure Spring MVC with the following bean:
             converter.setAlwaysReload(true);
             // to filter out some not displayable characters in PDF
             converter.setContentFormatter(content -> content.replaceAll("ő", "ö").replaceAll("Ő", "Ö"));
+            converter.setPathPrefix("pdf/");
             return converter;
         }
         
         @Bean
         public HtmlMessageConverter htmlConverter() {
+            HtmlMessageConverter converter = new HtmlMessageConverter();
+            converter.setPathPrefix("pdf/");
             return new HtmlMessageConverter();
         }
     }
