@@ -3,7 +3,17 @@ Small module to help generating PDFs in a Spring MVC webapp
 
 ## Usage
 
-Add the following to your pom:
+Add a new repository to your pom:
+
+    <repositories>
+      <repository>
+        <id>renszarv-cloudbees</id>
+        <url>http://repository-renszarv.forge.cloudbees.com/release</url>
+      </repository>
+    </repositories>
+
+
+Add this dependency to your pom:
 
     <dependency>
         <groupId>org.vermillionalbatross</groupId>
