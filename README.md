@@ -7,8 +7,8 @@ Add a new repository to your pom:
 
     <repositories>
       <repository>
-        <id>renszarv-cloudbees</id>
-        <url>http://repository-renszarv.forge.cloudbees.com/release</url>
+        <id>jitpack</id>
+        <url>https://jitpack.io</url>
       </repository>
     </repositories>
 
@@ -16,9 +16,9 @@ Add a new repository to your pom:
 Add this dependency to your pom:
 
     <dependency>
-        <groupId>org.vermillionalbatross</groupId>
+        <groupId>io.github.gzsombor</groupId>
         <artifactId>pdfserver</artifactId>
-        <version>0.1</version>
+        <version>0.2</version>
     </dependency>
 
 Configure Spring MVC with the following bean:
