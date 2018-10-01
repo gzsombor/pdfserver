@@ -1,4 +1,4 @@
-package org.vermillionalbatross.pdfserver.impl;
+package io.github.gzsombor.pdfserver.impl;
 
 import java.io.IOException;
 import java.io.OutputStreamWriter;
@@ -9,7 +9,7 @@ import org.springframework.http.HttpOutputMessage;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageNotWritableException;
 import org.springframework.stereotype.Component;
-import org.vermillionalbatross.pdfserver.api.PdfOutput;
+import io.github.gzsombor.pdfserver.api.PdfOutput;
 
 @Component
 public class HtmlMessageConverter extends ThymeleafMessageConverter {

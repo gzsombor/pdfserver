@@ -1,4 +1,4 @@
-package org.vermillionalbatross.pdfserver.impl;
+package io.github.gzsombor.pdfserver.impl;
 
 import java.io.IOException;
 import java.util.Locale;
@@ -11,8 +11,8 @@ import org.springframework.http.converter.AbstractHttpMessageConverter;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.thymeleaf.context.Context;
 import org.thymeleaf.spring4.SpringTemplateEngine;
-import org.vermillionalbatross.pdfserver.api.PdfContextConfigurer;
-import org.vermillionalbatross.pdfserver.api.PdfOutput;
+import io.github.gzsombor.pdfserver.api.PdfContextConfigurer;
+import io.github.gzsombor.pdfserver.api.PdfOutput;
 
 /**
  * Base class for executing thmeleaf process to convert the PdfOutput to textual

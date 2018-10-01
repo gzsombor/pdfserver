@@ -1,4 +1,4 @@
-package org.vermillionalbatross.pdfserver.api;
+package io.github.gzsombor.pdfserver.api;
 
 import org.thymeleaf.context.Context;
 

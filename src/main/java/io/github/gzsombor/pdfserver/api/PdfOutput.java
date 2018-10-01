@@ -1,4 +1,4 @@
-package org.vermillionalbatross.pdfserver.api;
+package io.github.gzsombor.pdfserver.api;
 
 /**
  * Interface to mark an object convertable to PDF. Returns the template name,
