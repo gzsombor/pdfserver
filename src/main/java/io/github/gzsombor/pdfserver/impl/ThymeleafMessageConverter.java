@@ -10,7 +10,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.converter.AbstractHttpMessageConverter;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.thymeleaf.context.Context;
-import org.thymeleaf.spring4.SpringTemplateEngine;
+import org.thymeleaf.spring5.SpringTemplateEngine;
 import io.github.gzsombor.pdfserver.api.PdfContextConfigurer;
 import io.github.gzsombor.pdfserver.api.PdfOutput;
 
@@ -95,7 +95,7 @@ public abstract class ThymeleafMessageConverter extends AbstractHttpMessageConve
         }
 
         if (templateEngine.isInitialized() && alwaysReload) {
-            templateEngine.getTemplateRepository().clearTemplateCache();
+            templateEngine.getCacheManager().clearAllCaches();
         }
 
         final String content = templateEngine.process(pathPrefix + toPdf.getTemplateName(), context);
