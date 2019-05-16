@@ -8,7 +8,6 @@ import javax.inject.Inject;
 import org.springframework.http.HttpInputMessage;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.AbstractHttpMessageConverter;
-import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.thymeleaf.context.Context;
 import org.thymeleaf.spring5.SpringTemplateEngine;
 import io.github.gzsombor.pdfserver.api.PdfContextConfigurer;
@@ -19,35 +18,22 @@ import io.github.gzsombor.pdfserver.api.PdfOutput;
  * representation.
  * 
  * @author zsombor
- *
  */
 public abstract class ThymeleafMessageConverter extends AbstractHttpMessageConverter<PdfOutput> {
-
     @Inject
     private SpringTemplateEngine templateEngine;
 
-    private boolean alwaysReload = false;
-
+    private boolean alwaysReload;
 
     private String pathPrefix = "";
 
-    /**
-     * 
-     */
     public ThymeleafMessageConverter() {
-        super();
     }
 
-    /**
-     * @param supportedMediaTypes
-     */
     public ThymeleafMessageConverter(MediaType... supportedMediaTypes) {
         super(supportedMediaTypes);
     }
 
-    /**
-     * @param supportedMediaType
-     */
     public ThymeleafMessageConverter(MediaType supportedMediaType) {
         super(supportedMediaType);
     }
@@ -76,14 +62,13 @@ public abstract class ThymeleafMessageConverter extends AbstractHttpMessageConve
         return this.pathPrefix;
     }
 
-    
     @Override
     protected boolean supports(Class<?> clazz) {
         return PdfOutput.class.isAssignableFrom(clazz);
     }
 
     @Override
-    protected PdfOutput readInternal(Class<? extends PdfOutput> clazz, HttpInputMessage inputMessage) throws IOException, HttpMessageNotReadableException {
+    protected PdfOutput readInternal(Class<? extends PdfOutput> clazz, HttpInputMessage inputMessage) throws IOException {
         throw new IllegalArgumentException();
     }
 
@@ -98,8 +83,6 @@ public abstract class ThymeleafMessageConverter extends AbstractHttpMessageConve
             templateEngine.getCacheManager().clearAllCaches();
         }
 
-        final String content = templateEngine.process(pathPrefix + toPdf.getTemplateName(), context);
-
-        return content;
+        return templateEngine.process(pathPrefix + toPdf.getTemplateName(), context);
     }
 }

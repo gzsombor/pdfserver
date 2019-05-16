@@ -5,12 +5,9 @@ package io.github.gzsombor.pdfserver.api;
  * and the name of the generated file.
  * 
  * @author zsombor
- *
  */
 public interface PdfOutput {
     String getTemplateName();
 
     String getOutputName();
-
 }
-

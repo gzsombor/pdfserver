@@ -7,20 +7,19 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpOutputMessage;
 import org.springframework.http.MediaType;
-import org.springframework.http.converter.HttpMessageNotWritableException;
 import org.springframework.stereotype.Component;
 import io.github.gzsombor.pdfserver.api.PdfOutput;
 
 @Component
 public class HtmlMessageConverter extends ThymeleafMessageConverter {
-    private final static Logger LOG = LoggerFactory.getLogger(HtmlMessageConverter.class);
+    private static final Logger LOG = LoggerFactory.getLogger(HtmlMessageConverter.class);
 
     public HtmlMessageConverter() {
         super(MediaType.TEXT_HTML);
     }
 
     @Override
-    protected void writeInternal(PdfOutput t, HttpOutputMessage outputMessage) throws IOException, HttpMessageNotWritableException {
+    protected void writeInternal(PdfOutput t, HttpOutputMessage outputMessage) throws IOException {
         LOG.info("rendering content  : {}", t);
         String content = process(t);
 
@@ -33,5 +32,4 @@ public class HtmlMessageConverter extends ThymeleafMessageConverter {
         w.write(content);
         w.flush();
     }
-
 }

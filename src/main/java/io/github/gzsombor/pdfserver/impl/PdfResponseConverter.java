@@ -8,17 +8,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpOutputMessage;
 import org.springframework.http.MediaType;
-import org.springframework.http.converter.HttpMessageNotWritableException;
 import org.springframework.stereotype.Component;
 import io.github.gzsombor.pdfserver.api.PdfOutput;
 import org.xhtmlrenderer.pdf.ITextRenderer;
 
 import com.itextpdf.text.DocumentException;
 
-
 @Component
 public class PdfResponseConverter extends ThymeleafMessageConverter {
-    private final static Logger LOG = LoggerFactory.getLogger(PdfResponseConverter.class);
+    private static final Logger LOG = LoggerFactory.getLogger(PdfResponseConverter.class);
 
     public static final MediaType PDF_MEDIA = new MediaType("application", "pdf");
 
@@ -40,7 +38,7 @@ public class PdfResponseConverter extends ThymeleafMessageConverter {
     }
 
     @Override
-    protected void writeInternal(PdfOutput t, HttpOutputMessage outputMessage) throws IOException, HttpMessageNotWritableException {
+    protected void writeInternal(PdfOutput t, HttpOutputMessage outputMessage) throws IOException {
         LOG.info("rendering content  : {}", t);
         final String content = process(t);
 
@@ -67,5 +65,4 @@ public class PdfResponseConverter extends ThymeleafMessageConverter {
             LOG.error("Document error: " + e.getMessage(), e);
         }
     }
-
 }
