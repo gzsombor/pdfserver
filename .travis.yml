@@ -1,5 +1,6 @@
+dist: bionic
 language: java
-jdk: oraclejdk8
+jdk: openjdk11
 
 install: mvn clean install -q
 
