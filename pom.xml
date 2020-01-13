@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>io.github.gzsombor</groupId>
   <artifactId>pdfserver</artifactId>
-  <version>0.3</version>
+  <version>0.4-SNAPSHOT</version>
   <name>PDF Server</name>
   <description>Infrastructure to generate PDF and HTML from templates in a Spring MVC application.</description>
 
@@ -10,8 +10,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <spring.version>5.1.10.RELEASE</spring.version>
-        <flying-saucer.version>9.1.18</flying-saucer.version>
+        <spring.version>5.2.2.RELEASE</spring.version>
+        <flying-saucer.version>9.1.20</flying-saucer.version>
         <thymeleaf-spring5.version>3.0.11.RELEASE</thymeleaf-spring5.version>
   </properties>
   <build>
@@ -19,7 +19,7 @@
       <extension>
         <groupId>org.apache.maven.wagon</groupId>
         <artifactId>wagon-webdav-jackrabbit</artifactId>
-        <version>3.3.3</version>
+        <version>3.3.4</version>
       </extension>
     </extensions>
 </build>
