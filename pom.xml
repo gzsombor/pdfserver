@@ -53,16 +53,11 @@
   </dependencies>
 
   <distributionManagement>
-    <repository>
-      <uniqueVersion>false</uniqueVersion>
-      <id>cloudbees-release</id>
-      <url>dav:https://repository-renszarv.forge.cloudbees.com/release/</url>
-    </repository>
-    <snapshotRepository>
-      <uniqueVersion>true</uniqueVersion>
-      <id>cloudbees-snapshot</id>
-      <url>dav:https://repository-renszarv.forge.cloudbees.com/snapshot/</url>
-    </snapshotRepository>
+   <repository>
+     <id>github</id>
+     <name>GitHub OWNER Apache Maven Packages</name>
+     <url>https://maven.pkg.github.com/gzsombor/pdfserver</url>
+   </repository>
   </distributionManagement>
 
 </project>
