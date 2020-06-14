@@ -18,12 +18,10 @@ import com.itextpdf.text.DocumentException;
 public class PdfResponseConverter extends ThymeleafMessageConverter {
     private static final Logger LOG = LoggerFactory.getLogger(PdfResponseConverter.class);
 
-    public static final MediaType PDF_MEDIA = new MediaType("application", "pdf");
-
     private Function<String, String> contentFormatter;
 
     public PdfResponseConverter() {
-        super(PDF_MEDIA);
+        super(MediaType.APPLICATION_PDF);
         this.contentFormatter = x -> x;
     }
 
@@ -46,7 +44,7 @@ public class PdfResponseConverter extends ThymeleafMessageConverter {
     }
 
     private void writePdf(HttpOutputMessage outputMessage, final String content, boolean forDownload, String name) throws IOException {
-        outputMessage.getHeaders().setContentType(PDF_MEDIA);
+        outputMessage.getHeaders().setContentType(MediaType.APPLICATION_PDF);
         if (forDownload && name != null) {
             outputMessage.getHeaders().set("Content-Disposition", "attachment; filename=\"" + name.replace('"', '_') + ".pdf\"");
         }
