@@ -1,4 +1,6 @@
-[![Build Status](https://travis-ci.org/gzsombor/pdfserver.svg?branch=master)](https://travis-ci.org/gzsombor/pdfserver)
+[![Travis Build Status](https://travis-ci.org/gzsombor/pdfserver.svg?branch=master)](https://travis-ci.org/gzsombor/pdfserver)
+
+![Maven Build](https://github.com/gzsombor/pdfserver/workflows/Maven%20Build/badge.svg)
 
 # pdfserver
 Small module to help generating PDFs in a Spring MVC webapp
@@ -9,8 +11,8 @@ Add a new repository to your pom:
 
     <repositories>
       <repository>
-        <id>jitpack</id>
-        <url>https://jitpack.io</url>
+        <id>github</id>
+        <url>https://maven.pkg.github.com/gzsombor/pdfserver</url>
       </repository>
     </repositories>
 
@@ -20,7 +22,7 @@ Add this dependency to your pom:
     <dependency>
         <groupId>io.github.gzsombor</groupId>
         <artifactId>pdfserver</artifactId>
-        <version>0.2</version>
+        <version>0.5</version>
     </dependency>
 
 Configure Spring MVC with the following bean:
