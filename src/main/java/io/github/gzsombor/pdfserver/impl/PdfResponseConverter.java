@@ -2,6 +2,8 @@ package io.github.gzsombor.pdfserver.impl;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.Collection;
+import java.util.function.Consumer;
 import java.util.function.Function;
 
 import org.slf4j.Logger;
@@ -9,6 +11,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpOutputMessage;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
+import org.w3c.dom.Document;
+
+import io.github.gzsombor.pdfserver.api.MergedPdfOutput;
 import io.github.gzsombor.pdfserver.api.PdfOutput;
 import org.xhtmlrenderer.pdf.ITextRenderer;
 
@@ -38,12 +43,26 @@ public class PdfResponseConverter extends ThymeleafMessageConverter {
     @Override
     protected void writeInternal(PdfOutput t, HttpOutputMessage outputMessage) throws IOException {
         LOG.info("rendering content  : {}", t);
-        final String content = process(t);
+        if (t instanceof MergedPdfOutput) {
+            MergedPdfOutput merged = (MergedPdfOutput) t;
+            Collection<? extends PdfOutput> parts = merged.getIndividualPdfs();
+            Document document = processList(parts);
 
-        writePdf(outputMessage, content, false, t.getOutputName());
+            writePdf(outputMessage, false, t.getOutputName(), renderer -> renderer.setDocument(document, null));
+        } else {
+            final String content = process(t);
+    
+            writePdf(outputMessage, false, t.getOutputName(), renderer -> renderer.setDocumentFromString(content));
+        }
     }
 
-    private void writePdf(HttpOutputMessage outputMessage, final String content, boolean forDownload, String name) throws IOException {
+    @Override
+    protected String process(PdfOutput toPdf) {
+        String content = super.process(toPdf);
+        return contentFormatter != null ? contentFormatter.apply(content) : content;
+    }
+
+    private void writePdf(HttpOutputMessage outputMessage, boolean forDownload, String name, Consumer<ITextRenderer> setup) throws IOException {
         outputMessage.getHeaders().setContentType(MediaType.APPLICATION_PDF);
         if (forDownload && name != null) {
             outputMessage.getHeaders().set("Content-Disposition", "attachment; filename=\"" + name.replace('"', '_') + ".pdf\"");
@@ -53,9 +72,7 @@ public class PdfResponseConverter extends ThymeleafMessageConverter {
         try {
             final ITextRenderer renderer = new ITextRenderer();
 
-            final String formatted = contentFormatter != null ? contentFormatter.apply(content) : content;
-
-            renderer.setDocumentFromString(formatted);
+            setup.accept(renderer);
             renderer.layout();
             renderer.createPDF(out);
             renderer.finishPDF();

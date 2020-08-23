@@ -1,15 +1,29 @@
 package io.github.gzsombor.pdfserver.impl;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.StringReader;
+import java.util.Collection;
 import java.util.Locale;
 
 import javax.inject.Inject;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathExpression;
+import javax.xml.xpath.XPathExpressionException;
+import javax.xml.xpath.XPathFactory;
 
 import org.springframework.http.HttpInputMessage;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.AbstractHttpMessageConverter;
 import org.thymeleaf.context.Context;
 import org.thymeleaf.spring5.SpringTemplateEngine;
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xhtmlrenderer.resource.XMLResource;
+import org.xml.sax.InputSource;
+
 import io.github.gzsombor.pdfserver.api.PdfContextConfigurer;
 import io.github.gzsombor.pdfserver.api.PdfOutput;
 
@@ -26,6 +40,8 @@ public abstract class ThymeleafMessageConverter extends AbstractHttpMessageConve
     private boolean alwaysReload;
 
     private String pathPrefix = "";
+    
+    private XPathFactory xpathFactory = XPathFactory.newInstance();
 
     public ThymeleafMessageConverter() {
     }
@@ -84,5 +100,56 @@ public abstract class ThymeleafMessageConverter extends AbstractHttpMessageConve
         }
 
         return templateEngine.process(pathPrefix + toPdf.getTemplateName(), context);
+    }
+
+    protected Document parseHtml(String content) {
+        InputSource is = new InputSource(new BufferedReader(new StringReader(content)));
+        Document dom = XMLResource.load(is).getDocument();
+        return dom;
+    }
+
+    protected Document processList(Collection<? extends PdfOutput> toPdf) {
+        try {
+            Document document = null;
+            String documentName = null;
+            XPath path = xpathFactory.newXPath();
+            XPathExpression bodyPath = path.compile("//body");
+            for (PdfOutput pdfFragments : toPdf) {
+                String content = process(pdfFragments);
+                Document fragment = parseHtml(content);
+                if (document == null) {
+                    document = fragment;
+                    documentName = pdfFragments.getTemplateName();
+                } else {
+                    mergeHtml(bodyPath, document, fragment, pdfFragments.getTemplateName());
+                }
+            }
+            return document;
+        } catch (XPathExpressionException e) {
+            throw new RuntimeException("Unable to parse XPath expression:"+e.getMessage(), e);
+        }
+    }
+
+    /**
+     * @param bodyPath
+     * @param document
+     * @param fragment
+     * @throws XPathExpressionException
+     */
+    private void mergeHtml(XPathExpression bodyPath, Document document, Document fragment, String templateName) throws XPathExpressionException {
+        Node documentBody = (Node) bodyPath.evaluate(document, XPathConstants.NODE);
+        if (documentBody == null) {
+            throw new IllegalArgumentException("Unable to find 'body' element in : "+documentBody);
+        }
+        Node newBody = (Node) bodyPath.evaluate(fragment, XPathConstants.NODE);
+        if (newBody == null) {
+            throw new IllegalArgumentException("Unable to find 'body' element in template: "+templateName);
+        }
+        NodeList childNodes = newBody.getChildNodes();
+        for (int i=0;i<childNodes.getLength();i++) {
+            Node toAppend = childNodes.item(i).cloneNode(true);
+            document.adoptNode(toAppend);
+            documentBody.appendChild(toAppend);
+        }
     }
 }
