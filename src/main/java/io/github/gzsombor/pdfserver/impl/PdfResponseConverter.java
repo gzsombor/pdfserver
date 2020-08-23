@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 import io.github.gzsombor.pdfserver.api.PdfOutput;
 import org.xhtmlrenderer.pdf.ITextRenderer;
 
-import com.itextpdf.text.DocumentException;
+import com.lowagie.text.DocumentException;
 
 @Component
 public class PdfResponseConverter extends ThymeleafMessageConverter {
