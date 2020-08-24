@@ -3,10 +3,17 @@ package io.github.gzsombor.pdfserver.impl;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.StringReader;
+import java.io.StringWriter;
 import java.util.Collection;
 import java.util.Locale;
 
 import javax.inject.Inject;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
@@ -151,5 +158,13 @@ public abstract class ThymeleafMessageConverter extends AbstractHttpMessageConve
             document.adoptNode(toAppend);
             documentBody.appendChild(toAppend);
         }
+    }
+
+    protected String documentToString(Document document) throws TransformerException {
+        TransformerFactory tf = TransformerFactory.newInstance();
+        Transformer trans = tf.newTransformer();
+        StringWriter sw = new StringWriter();
+        trans.transform(new DOMSource(document), new StreamResult(sw));
+        return sw.toString();
     }
 }
