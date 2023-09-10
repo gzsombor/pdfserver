@@ -7,7 +7,7 @@ import java.io.StringWriter;
 import java.util.Collection;
 import java.util.Locale;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
