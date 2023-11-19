@@ -2,14 +2,14 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>io.github.gzsombor</groupId>
   <artifactId>pdfserver</artifactId>
-  <version>0.7</version>
+  <version>0.8</version>
   <name>PDF Server</name>
   <description>Infrastructure to generate PDF and HTML from templates in a Spring MVC application.</description>
 
   <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
         <spring.version>6.1.0</spring.version>
         <flying-saucer.version>9.1.22</flying-saucer.version>
         <openpdf.version>1.3.30</openpdf.version>
