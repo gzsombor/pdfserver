@@ -20,9 +20,9 @@ Add a new repository to your pom:
 Add this dependency to your pom:
 
     <dependency>
-        <groupId>io.github.gzsombor</groupId>
+        <groupId>com.github.gzsombor</groupId>
         <artifactId>pdfserver</artifactId>
-        <version>0.5</version>
+        <version>v0.8.1</version>
     </dependency>
 
 Configure Spring MVC with the following bean:
