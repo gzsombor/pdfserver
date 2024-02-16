@@ -1,5 +1,3 @@
-[![Travis Build Status](https://travis-ci.org/gzsombor/pdfserver.svg?branch=master)](https://travis-ci.org/gzsombor/pdfserver)
-
 ![Maven Build](https://github.com/gzsombor/pdfserver/workflows/Maven%20Build/badge.svg)
 
 # pdfserver
@@ -22,7 +20,7 @@ Add this dependency to your pom:
     <dependency>
         <groupId>com.github.gzsombor</groupId>
         <artifactId>pdfserver</artifactId>
-        <version>v0.8.1</version>
+        <version>v0.8.2</version>
     </dependency>
 
 Configure Spring MVC with the following bean:
