@@ -12,7 +12,7 @@
         <maven.compiler.target>17</maven.compiler.target>
         <spring.version>6.1.4</spring.version>
         <flying-saucer.version>9.3.2</flying-saucer.version>
-        <openpdf.version>2.0.0</openpdf.version>
+        <openpdf.version>2.0.1</openpdf.version>
         <thymeleaf-spring6.version>3.1.2.RELEASE</thymeleaf-spring6.version>
   </properties>
   <build>
