@@ -20,7 +20,7 @@ Add this dependency to your pom:
     <dependency>
         <groupId>com.github.gzsombor</groupId>
         <artifactId>pdfserver</artifactId>
-        <version>v0.8.2</version>
+        <version>v0.8.3</version>
     </dependency>
 
 Configure Spring MVC with the following bean:
