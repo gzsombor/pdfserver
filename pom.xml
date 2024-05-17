@@ -10,7 +10,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
-        <spring.version>6.1.6</spring.version>
+        <spring.version>6.1.7</spring.version>
         <flying-saucer.version>9.3.2</flying-saucer.version>
         <openpdf.version>2.0.2</openpdf.version>
         <thymeleaf-spring6.version>3.1.2.RELEASE</thymeleaf-spring6.version>
