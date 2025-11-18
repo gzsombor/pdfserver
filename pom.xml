@@ -28,7 +28,7 @@
   <dependencies>
       <dependency>
           <groupId>org.xhtmlrenderer</groupId>
-          <artifactId>flying-saucer-pdf-openpdf</artifactId>
+          <artifactId>flying-saucer-pdf</artifactId>
           <version>${flying-saucer.version}</version>
       </dependency>
       <dependency>
