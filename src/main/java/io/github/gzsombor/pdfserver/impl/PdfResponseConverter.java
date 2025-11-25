@@ -17,7 +17,7 @@ import io.github.gzsombor.pdfserver.api.MergedPdfOutput;
 import io.github.gzsombor.pdfserver.api.PdfOutput;
 import org.xhtmlrenderer.pdf.ITextRenderer;
 
-import com.lowagie.text.DocumentException;
+import org.openpdf.text.DocumentException;
 
 @Component
 public class PdfResponseConverter extends ThymeleafMessageConverter {
