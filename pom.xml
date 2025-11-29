@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.github.gzsombor</groupId>
   <artifactId>pdfserver</artifactId>
-  <version>v0.8.6</version>
+  <version>v0.8.7</version>
   <name>PDF Server</name>
   <description>Infrastructure to generate PDF and HTML from templates in a Spring MVC application.</description>
 
