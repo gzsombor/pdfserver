@@ -1,0 +1,48 @@
+name: Create Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      versionNumber:
+        description: 'Version number for the release'
+        required: true
+        type: string
+
+jobs:
+  create-release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Update version in pom.xml
+        run: |
+          sed -i "s|<version>.*</version>|<version>${{ inputs.versionNumber }}</version>|g" pom.xml
+        env:
+          VERSION: ${{ inputs.versionNumber }}
+
+      - name: Commit version change
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add pom.xml
+          git commit -m "Bump version to ${{ inputs.versionNumber }}"
+
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          force: true
+
+      - name: Create GitHub Release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ inputs.versionNumber }}
+          release_name: Release ${{ inputs.versionNumber }}
+          draft: false
+          prerelease: false
