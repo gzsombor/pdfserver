@@ -11,8 +11,8 @@
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
         <spring.version>7.0.7</spring.version>
-        <flying-saucer.version>10.1.0</flying-saucer.version>
-        <openpdf.version>3.0.4</openpdf.version>
+        <flying-saucer.version>10.2.2</flying-saucer.version>
+        <openpdf.version>3.0.5</openpdf.version>
         <thymeleaf-spring6.version>3.1.5.RELEASE</thymeleaf-spring6.version>
   </properties>
   <build>
@@ -68,7 +68,7 @@
       <dependency>
           <groupId>org.junit.jupiter</groupId>
           <artifactId>junit-jupiter</artifactId>
-          <version>6.0.3</version>
+          <version>6.1.0</version>
           <scope>test</scope>
       </dependency>
       <dependency>
