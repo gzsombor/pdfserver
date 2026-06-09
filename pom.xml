@@ -10,7 +10,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
-        <spring.version>7.0.7</spring.version>
+        <spring.version>7.0.8</spring.version>
         <flying-saucer.version>10.2.2</flying-saucer.version>
         <thymeleaf-spring6.version>3.1.5.RELEASE</thymeleaf-spring6.version>
   </properties>
