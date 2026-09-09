@@ -1,10 +1,37 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>com.github.gzsombor</groupId>
+  <groupId>io.github.gzsombor</groupId>
   <artifactId>pdfserver</artifactId>
-  <version>v0.9.6</version>
+  <version>0.9.9</version>
+  <packaging>jar</packaging>
   <name>PDF Server</name>
   <description>Infrastructure to generate PDF and HTML from templates in a Spring MVC application.</description>
+
+  <url>https://github.com/gzsombor/pdfserver</url>
+
+  <licenses>
+    <license>
+      <name>Apache License, Version 2.0</name>
+      <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+
+  <developers>
+    <developer>
+      <id>gzsombor</id>
+      <name>Zsombor Gegesy</name>
+      <url>https://github.com/gzsombor</url>
+    </developer>
+  </developers>
+
+  <scm>
+    <connection>scm:git:git://github.com/gzsombor/pdfserver.git</connection>
+    <developerConnection>scm:git:ssh://git@github.com/gzsombor/pdfserver.git</developerConnection>
+    <url>https://github.com/gzsombor/pdfserver</url>
+    <tag>HEAD</tag>
+  </scm>
+
 
   <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -13,6 +40,9 @@
         <spring.version>7.0.9</spring.version>
         <flying-saucer.version>10.5.0</flying-saucer.version>
         <thymeleaf-spring6.version>3.1.5.RELEASE</thymeleaf-spring6.version>
+
+        <central-publishing-plugin.version>0.11.0</central-publishing-plugin.version>
+        <maven-gpg-plugin.version>3.2.7</maven-gpg-plugin.version>
   </properties>
   <build>
     <extensions>
@@ -28,7 +58,73 @@
         <artifactId>maven-surefire-plugin</artifactId>
         <version>3.6.0</version>
       </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.16.0</version>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+        <version>3.4.0</version>
+        <executions>
+          <execution>
+            <id>attach-sources</id>
+            <goals>
+              <goal>jar-no-fork</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>3.12.0</version>
+        <configuration>
+          <doclint>none</doclint>
+        </configuration>
+        <executions>
+          <execution>
+            <id>attach-javadocs</id>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <!-- GPG signing of artifacts (required by Maven Central) -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-gpg-plugin</artifactId>
+        <version>${maven-gpg-plugin.version}</version>
+        <executions>
+          <execution>
+            <id>sign-artifacts</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>sign</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+
+      <!-- Publishing to the new Central Portal (central.sonatype.com) -->
+      <plugin>
+        <groupId>org.sonatype.central</groupId>
+        <artifactId>central-publishing-maven-plugin</artifactId>
+        <version>${central-publishing-plugin.version}</version>
+        <extensions>true</extensions>
+        <configuration>
+          <publishingServerId>central</publishingServerId>
+          <autoPublish>true</autoPublish>
+        </configuration>
+      </plugin>
     </plugins>
+
 </build>
 
   <dependencies>
