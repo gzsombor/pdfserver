@@ -42,7 +42,7 @@
         <thymeleaf-spring6.version>3.1.5.RELEASE</thymeleaf-spring6.version>
 
         <central-publishing-plugin.version>0.11.0</central-publishing-plugin.version>
-        <maven-gpg-plugin.version>3.2.7</maven-gpg-plugin.version>
+        <maven-gpg-plugin.version>3.2.8</maven-gpg-plugin.version>
   </properties>
   <build>
     <extensions>
