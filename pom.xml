@@ -38,7 +38,7 @@
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
         <spring.version>7.0.9</spring.version>
-        <flying-saucer.version>10.5.0</flying-saucer.version>
+        <flying-saucer.version>10.6.0</flying-saucer.version>
         <thymeleaf-spring6.version>3.1.5.RELEASE</thymeleaf-spring6.version>
 
         <central-publishing-plugin.version>0.11.0</central-publishing-plugin.version>
