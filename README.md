@@ -5,22 +5,12 @@ Small module to help generating PDFs in a Spring MVC webapp
 
 ## Usage
 
-Add a new repository to your pom:
-
-    <repositories>
-      <repository>
-        <id>github</id>
-        <url>https://maven.pkg.github.com/gzsombor/pdfserver</url>
-      </repository>
-    </repositories>
-
-
 Add this dependency to your pom:
 
     <dependency>
-        <groupId>com.github.gzsombor</groupId>
+        <groupId>io.github.gzsombor</groupId>
         <artifactId>pdfserver</artifactId>
-        <version>v0.9.4</version>
+        <version>0.9.10</version>
     </dependency>
 
 Configure Spring MVC with the following bean:
